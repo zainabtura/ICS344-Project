@@ -1,5 +1,5 @@
 
-# 🧩 Setting Up the Victim Machine (Metasploitable3)
+# Setting Up the Victim Machine (Metasploitable3)
 
 We started by visiting the official Vagrant repository by Rapid7:  
 🔗 [https://app.vagrantup.com/rapid7](https://app.vagrantup.com/rapid7)
@@ -12,7 +12,7 @@ We selected `rapid7/metasploitable3-ub1404` as it is commonly used in penetratio
 
 ---
 
-## 🧰 Converting for macOS
+## Converting for macOS
 
 One of our team members used a Mac, which led to some compatibility issues with VirtualBox.  
 To solve this, we converted the `.vmdk` image into `.qcow2` format using `qemu-img`, which works with UTM:
@@ -43,7 +43,7 @@ We then started the VM and successfully logged in using:
 
 ---
 
-## 🛠️ Attacker Environment Setup (Kali Linux)
+##  Attacker Environment Setup (Kali Linux)
 
 For the attacker environment, we used Kali Linux, which was already downloaded and set up in a previous course assignment.  
 It was imported into VirtualBox using the official `.ova` file from Kali's website:
@@ -110,7 +110,7 @@ search ssh
 
 ---
 
-## 💣 SSH Brute Force Attack (Metasploit)
+##  SSH Brute Force Attack (Metasploit)
 
 To attempt access to the SSH service on the victim machine, we used the Metasploit module:
 
@@ -150,7 +150,7 @@ run
 
 ---
 
-### ✅ Result
+###  Result
 
 The module tested various combinations and successfully found a valid login:
 
@@ -163,13 +163,13 @@ This confirms that the SSH service was vulnerable to credential-based brute-forc
 
 
 
-## 🧪 Task 1.2 - Custom SSH Attack Script (Python Proof of Concept)
+##  Task 1.2 - Custom SSH Attack Script (Python Proof of Concept)
 
 To demonstrate a manual SSH-based attack without using Metasploit, we created a custom script using Python and the `paramiko` library.
 
 ---
 
-### 🔧 Environment Setup
+###  Environment Setup
 
 We first made sure the system was ready by installing `pip` and `paramiko`:
 
@@ -183,7 +183,7 @@ sudo python3 -m pip install paramiko --break-system-packages
 
 ---
 
-### 🧠 Script Logic
+###  Script Logic
 
 We created a script called `ssh_bruteforce.py` that:
 - Loads usernames and passwords from two files
@@ -233,7 +233,7 @@ with open(username_file, "r") as users, open(password_file, "r") as passwords:
 
 ---
 
-### 🧪 Running the Script
+###  Running the Script
 
 We ran the script using:
 
@@ -247,7 +247,7 @@ python3 ssh_bruteforce.py
 
 ---
 
-## ✅ Compromising the Service using Custom Script
+##  Compromising the Service using Custom Script
 
 After developing and executing our Python script (`ssh_bruteforce.py`), we were able to successfully connect to the victim machine over SSH using the credentials:
 
