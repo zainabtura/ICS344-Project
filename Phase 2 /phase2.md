@@ -1,9 +1,17 @@
 
 # 📊 ICS344 – Phase 2: Visual Analysis with a SIEM Dashboard
 
-In this phase, our goal was to build visibility into the attack by collecting and analyzing logs using a Security Information and Event Management (SIEM) system. By deploying **Splunk** on the attacker machine, we were able to collect logs from both attacker and victim environments, visualize authentication attempts, and correlate the data to understand when and how the attack succeeded.
+In this phase, we focused on leveraging a SIEM platform—**Splunk**—to collect, analyze, and visualize logs from both the attacker and victim environments. The goal was to monitor the attack activity from multiple perspectives and gain a deeper understanding of how the attack unfolded.
 
-This phase lays the groundwork for monitoring, detection, and response by leveraging Splunk’s powerful log parsing and dashboard features.
+To fulfill the project requirements, we completed the following:
+
+- **Integrated logs** from both the victim (Metasploitable3) and attacker (Kali Linux) environments into Splunk.
+- **Visualized the attack behavior** using Splunk dashboards and searches to identify authentication patterns, brute-force attempts, and indicators of compromise.
+- **Compared logs** from both environments to correlate actions performed by the attacker with reactions and logs recorded on the victim system.
+
+This setup allowed us to clearly observe the full lifecycle of the attack and demonstrate how a SIEM can be used for forensic analysis, monitoring, and alerting.
+
+Below, we walk through each step in setting up Splunk and performing the required tasks, supported with screenshots and log evidence.
 
 ---
 
@@ -68,26 +76,24 @@ This URL provides access to the Splunk dashboard, where we can begin configuring
 
 ### Step 3: Configuring Splunk to Receive Logs
 
-After logging into Splunk at `http://kali:8000`, we navigated to:
+We then opened the browser from the Kali attacker VM and go to `http://kali:8000`.  
+Then we login using the admin credentials that were created during the initial setup.
+
+
+After that, we navigated to:
 
 ```
-Settings → Forwarding and Receiving → Receive data
+Search → Dtat → Forwarding and Receiving
 ```
+![Add Data](https://github.com/user-attachments/assets/175a382a-c763-44de-8144-4e52e0d35e64)
 
-We opened the “Receive data” section and began the setup to allow Splunk to accept forwarded log data.
+
+We then navigated to add new in the “Receive data” section and began the setup to allow Splunk to accept forwarded log data. And from there, we created a new TCP input on port `9997` to accept logs from external sources.
 
 ![Receive Data](https://github.com/user-attachments/assets/a3282a32-c71a-42cc-8767-6a8c0e8aafc7)
 
-From there, we created a new TCP input on port `9997` to accept logs from external sources.
-
 ![Configure Port](https://github.com/user-attachments/assets/f3c3e1c4-3980-474e-9a71-b6f0564b3464)
 
-#### Additional View – Splunk Data Configuration
-
-To finalize the setup, we accessed the **"Add Data"** section from the Splunk dashboard.  
-This menu allows configuration of inputs and ensures logs can be ingested correctly from various sources.
-
-![Add Data](https://github.com/user-attachments/assets/175a382a-c763-44de-8144-4e52e0d35e64)
 
 ---
 
