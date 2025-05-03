@@ -216,6 +216,7 @@ To demonstrate the effect of our SSH hardening, we first ran the exact same Pyth
 
 
 After doing the defense by enabling our Fail2Ban configuration, we repeated the identical brute-force command. In the after scenario, we can see that no credentials can be cracked: every connection attempt is immediately reset (even for vagrant), proving that the firewall rules installed by Fail2Ban are actively blocking SSH connections from the attacker’s IP. Also, we can see that the jail alreadey banned the address. 
+
 <img width="468" alt="000" src="https://github.com/user-attachments/assets/bb036cc8-dee9-4b75-940a-1523e7260939" />
 <img width="468" alt="345" src="https://github.com/user-attachments/assets/3eab24b7-d8c8-4e29-a3b7-c3ba623db514" />
 
