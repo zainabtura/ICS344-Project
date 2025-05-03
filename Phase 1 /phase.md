@@ -119,20 +119,50 @@ search ssh
 
 ---
 
-##  SSH Brute Force Attack (Metasploit)
+## SSH Brute Force Attack (Metasploit)
 
-To attempt access to the SSH service on the victim machine, we used the Metasploit module:
+To initiate the attack on the SSH service, we followed a structured approach:
+
+---
+
+### Step 1: Prepare Wordlists and Launch Metasploit Console
+
+Before launching the brute-force attempt, we created two wordlists to simulate a dictionary attack:
+
+- `users.txt` → a list of potential usernames (`admin`, `user`, `vagrant`, etc.)
+- `pass.txt` → a list of commonly used or weak passwords
+
+These lists help automate the process of trying multiple login combinations to uncover valid credentials.
+
+We then started Metasploit by running the following command in the terminal:
 
 ```bash
-use auxiliary/scanner/ssh/ssh_login
-```
-
-Before launching the brute-force attack, we created two wordlists:
-- `users.txt` → list of possible usernames
-- `pass.txt` → list of possible passwords
+msfconsole
 
 ![WhatsApp Image 1446-10-23 at 10 05 00](https://github.com/user-attachments/assets/1b8cfd11-e706-4602-b64c-6cdb9d894029)
 
+---
+
+### Step 2: Search for SSH-Related Modules
+
+After launching Metasploit, we searched for SSH-related modules to identify potential tools for exploitation.
+
+We used the following command:
+
+```bash
+search ssh
+
+![WhatsApp Image 1446-10-24 at 09 53 38](https://github.com/user-attachments/assets/c2d9bedb-91cc-421a-8c81-e972a594930b) 
+
+---
+### Step 3: Select the SSH Login Module
+
+From the search results, we selected the SSH login scanner module. This module attempts to authenticate to the target SSH service using combinations from the provided username and password lists.
+
+We used the following command to load the module:
+
+```bash
+use auxiliary/scanner/ssh/ssh_login
 
 We then configured the module with the following settings:
 
