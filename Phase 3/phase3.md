@@ -210,11 +210,14 @@ Together, these steps conclusively demonstrate that after three failed login att
 
 ### before-and-after comparison 
 
-To demonstrate the effect of our SSH hardening, we first ran the exact same Python brute-force script from Kali before enabling Fail2Ban. Before enabling Fail2Ban, the script quickly discovered valid root credentials (vagrant:vagrant), as shown here.
+To demonstrate the effect of our SSH hardening, we first ran the exact same Python brute-force script from Kali before enabling Fail2Ban. Before enabling Fail2Ban, the script quickly discovered valid root credentials (vagrant:vagrant), as shown here. Also we can see that the jail have not banned any addresses yet. 
 ![14](https://github.com/user-attachments/assets/93e56d10-da6f-46ee-85fc-690e186d389e)
+<img width="468" alt="ps" src="https://github.com/user-attachments/assets/49744dcc-6971-4c73-b7fb-1921ade5d7b6" />
 
 
-After doing the defense by enabling our Fail2Ban configuration, we repeated the identical brute-force command. In the after scenario, we can see that no credentials can be cracked: every connection attempt is immediately reset (even for vagrant), proving that the firewall rules installed by Fail2Ban are actively blocking SSH connections from the attacker’s IP.
+After doing the defense by enabling our Fail2Ban configuration, we repeated the identical brute-force command. In the after scenario, we can see that no credentials can be cracked: every connection attempt is immediately reset (even for vagrant), proving that the firewall rules installed by Fail2Ban are actively blocking SSH connections from the attacker’s IP. Also, we can see that the jail alreadey banned the address. 
 <img width="468" alt="000" src="https://github.com/user-attachments/assets/bb036cc8-dee9-4b75-940a-1523e7260939" />
+<img width="468" alt="345" src="https://github.com/user-attachments/assets/3eab24b7-d8c8-4e29-a3b7-c3ba623db514" />
+
 
 By directly comparing before and after, we clearly see the security improvement: the same brute-force vector that once succeeded is now completely thwarted, validating our defense strategy.
