@@ -35,7 +35,7 @@ qemu-img convert -O qcow2 -c metasploitable3-ub1404-disk001.vmdk metasploitable3
 
 ---
 
-## 🖥️ Creating the VM in UTM
+## Creating the VM in UTM
 
 After the conversion, we created the victim VM using UTM on macOS.  
 Steps followed:
@@ -61,7 +61,7 @@ It was imported into VirtualBox using the official `.ova` file from Kali's websi
 
 ---
 
-### 🌐 Network Configuration (Both Machines)
+### Network Configuration (Both Machines)
 
 
 We configured the network for both Metasploitable3 (victim) and Kali (attacker) using the **Bridged Adapter** mode.
@@ -88,7 +88,7 @@ ping 192.168.64.7
 
   → This confirms that the attacker and victim are connected and able to communicate
 
-## 🔍 Service Scan and Target Selection (Nmap + SSH Focus)
+## Service Scan and Target Selection (Nmap + SSH Focus)
 
 After verifying network connectivity, we used `nmap` from the attacker machine (Kali) to scan the victim for open services and their versions:
 
@@ -159,6 +159,7 @@ We used the following command to load the module:
 
 ```bash
 use auxiliary/scanner/ssh/ssh_login
+```
 
 We then configured the module with the following settings:
 
