@@ -117,8 +117,6 @@ We chose to focus on the **SSH service** as our target for exploitation because:
 
 To initiate the attack on the SSH service, we followed a structured approach:
 
----
-
 ### Step 1: Prepare Wordlists and Launch Metasploit Console
 
 Before launching the brute-force attempt, we created two wordlists to simulate a dictionary attack:
@@ -186,16 +184,25 @@ run
 
 ---
 
-###  Result
+###  Results
 
-The module tested various combinations and successfully found a valid login:
-
+The output shows that the brute-force attack attempted various username and password combinations against the target IP `192.168.64.7` over SSH (port 22). Most combinations failed, which is indicated by the repeated `Failed:` lines.
+Eventually, one combination succeeded:
 - **Username:** `vagrant`  
 - **Password:** `vagrant`
 
-SSH session was successfully opened to `192.168.64.7:22`, giving full shell access to the victim.
+Once these credentials were found, Metasploit successfully established an SSH session with the target machine, as shown by: 
+```bash
+[*] SSH session 1 opened (192.168.64.5:38567 -> 192.168.64.7:22)
+```
 
-This confirms that the SSH service was vulnerable to credential-based brute-force attacks.
+This confirms that:
+
+- The SSH service on the target is vulnerable to brute-force due to weak/default credentials. 
+- The Metasploit module `auxiliary/scanner/ssh/ssh_login` was able to gain access to the system.
+- The session was opened with user-level privileges (`uid=900(vagrant)`), indicating limited access but successful exploitation.
+
+The final message `Auxiliary module execution completed` confirms that the attack finished without error.
 
 
 
