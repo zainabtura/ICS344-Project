@@ -309,3 +309,32 @@ The script confirmed this by:
 
 ![WhatsApp Image 1446-10-24 at 09 28 00](https://github.com/user-attachments/assets/41d31ea9-da25-4076-95b7-fb53e8f51c04)
 
+---
+## Results
+### Interpretation of Results (Custom Python Script)
+
+The screenshots above demonstrate the execution and outcome of a custom SSH brute-force script written in Python using the `paramiko` library.
+
+- The script iterates over username-password combinations attempting to log in to the victim machine via SSH.
+- Most login attempts failed with the error:
+```bash
+paramiko.ssh_exception.SSHException: Error reading SSH protocol banner
+```
+This typically indicates a connection issue or that the server rejected the attempt too quickly (e.g., rate-limiting or banner timeout).
+
+- Despite the initial failures, the script successfully authenticated using the following credentials:
+  - **Username:** `vagrant`
+  - **Password:** `vagrant`
+
+
+- Upon successful login, the script executed the command `uname -a` on the victim machine to verify access. The output confirms that the target is running:
+```bash
+Linux metasploitable3-ub1404 ...
+```
+
+- Additionally, the script saved the valid credentials to a file named `credentials.txt`, as shown in the file explorer and the text file content:
+```bash
+vagrant:vagrant
+```
+This proves that the custom script worked as intended by automating SSH login attempts, detecting successful access, verifying it via command execution, and storing the result for later use.
+
