@@ -148,9 +148,15 @@ sudo /opt/splunkforwarder/bin/splunk add monitor /var/log/auth.log
 
 Before analyzing the logs in Splunk, we executed a custom Python script (`ssh_bruteforce.py`) on the attacker machine to simulate an SSH brute-force attack against the victim (Metasploitable3).
 
-The script uses the `paramiko` library to try multiple username and password combinations.
+The script uses the `paramiko` library to try multiple username and password combinations. It successfully established a connection using the credentials:
 
-Several connection attempts failed due to SSH protocol issues — specifically when the server didn’t respond properly to the connection, causing timeout or banner read errors.
+- **Username:** `vagrant`
+- **Password:** `vagrant`
+
+Once valid credentials were found, the script executed a command (`uname -a`) on the victim machine to confirm shell access and saved the credentials inside a file named `credentials.txt`.
+
+This confirmed that the brute-force attempt worked and gave us remote access to the target over SSH.
+
 
 ![Brute Force Script](https://github.com/user-attachments/assets/abada982-d5d7-4be0-9901-ebe0f2656be6)
 ![WhatsApp Image 1446-11-05 at 13 33 14](https://github.com/user-attachments/assets/c6678d92-dcdf-4ee3-9032-d7a80cdaccae)
