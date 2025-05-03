@@ -36,7 +36,12 @@ sudo tar xvzf splunk-9.4.1-83dbab203ac8-linux-amd64.tgz
 
 ###  Step 2: First Launch of Splunk
 
-We launched Splunk for the first time using:
+We navigated to Splunk’s installation directory and ran the startup command, accepting the license agreement. Splunk then prompted us to:
+
+- Create an administrator username and password.  
+- Generate RSA key pairs for secure communication.  
+- Verify that all required ports (HTTP 8000, management 8089, REST 8065, KVStore 8191) are open.  
+- Initialize internal directories under `/opt/splunk/var`.
 
 ```bash
 cd /opt/splunk/bin
