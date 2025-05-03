@@ -29,6 +29,16 @@ sudo tail -n50 /var/log/auth.log | grep Accepted
 
 <img width="468" alt="Picture2" src="https://github.com/user-attachments/assets/5d11d544-c761-4f3e-a44b-965b4d79156d" />
 
+The screenshot confirms that SSH log monitoring was active during the brute-force attack. The command `tail -f /var/log/auth.log` successfully displayed authentication events in real time.
+
+The presence of the log entry:
+```bash
+Accepted password for vagrant from 192.168.64.X port XXXXX ssh2
+```
+indicates that a login attempt using the `vagrant` credentials was successful. This confirms the effectiveness of the brute-force script and verifies that Metasploitable3 correctly logged the accepted connection in `/var/log/auth.log`.
+
+By using `grep Accepted` on the recent logs, we were able to filter out the relevant line for reporting purposes, showing proof of access from the attacker's IP.
+
 ---
 
 ### Step 2 – Launch Brute-Force from Kali
