@@ -1,5 +1,5 @@
 # ICS344-Project
-This repository contains the full implementation of our ICS344 course project. The course focuses on **INformation Security**, and this project is designed to apply core concepts of system exploitation, attack detection, and defensive countermeasures in a hands-on, practical manner.
+This repository contains the full implementation of our ICS344 course project. The course focuses on **Information Security**, and this project is designed to apply core concepts of system exploitation, attack detection, and defensive countermeasures in a hands-on, practical manner.
 
 The project simulates a real-world security scenario by:
 - Deploying a vulnerable target (Metasploitable3)
