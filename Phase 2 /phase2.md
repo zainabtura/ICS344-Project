@@ -58,10 +58,10 @@ Configuration of certificate files (privKeySecure.pem)
 Startup of the Splunk server daemon (splunkd)
 After all checks passed, Splunk began listening on its default service ports:
 
-8000 → Web Interface
-8089 → Management Port
-8065 → App Server Port
-8191 → KV Store
+- 8000 → Web Interface
+- 8089 → Management Port
+- 8065 → App Server Port
+- 8191 → KV Store
 Once the setup completed, the web interface became available at:
 ```bash
 http://kali:8000
