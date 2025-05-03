@@ -83,7 +83,7 @@ Then we login using the admin credentials that were created during the initial s
 After that, we navigated to:
 
 ```
-Search → Dtat → Forwarding and Receiving
+Search → Data → Forwarding and Receiving
 ```
 ![Add Data](https://github.com/user-attachments/assets/175a382a-c763-44de-8144-4e52e0d35e64)
 
