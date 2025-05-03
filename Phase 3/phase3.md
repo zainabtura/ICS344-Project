@@ -57,7 +57,7 @@ Together, these steps provide the “before” evidence that port 22 on Metasplo
 
 ---
 
-### Step 3 – Install Defense Prerequisites on Metasploitable3
+### Step 3 – Install Defense Prerequisites on Metasploitable3 ( fail2ban and iptables )
 
 To begin, we updated the Metasploitable3 VM’s package index to ensure we’re installing the most current software versions. I ran:
 
