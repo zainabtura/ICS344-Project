@@ -1,5 +1,14 @@
+# Phase 1
 
-# Setting Up the Victim Machine (Metasploitable3)
+In this phase, we will deploy our victim and attacker environments. We’ll configure Metasploitable3 as the victim machine—complete with its built-in vulnerable services (IIS FTP/HTTP, SSH, WinRM, WebDAV, SNMP, SMB, RDP, etc.)—and spin up a Kali Linux attacker host on the same network. Once both VMs are running, we’ll verify connectivity by scanning and pinging the victim from Kali.
+
+Next, we’ll tackle the exploitation tasks:  
+1. **Task 1.1** – Use Metasploit’s modules to discover and compromise one of the victim’s services.  
+2. **Task 1.2** – Develop a custom script that automates the exploit, captures proof-of-concept output, and saves valid credentials.  
+
+By the end of Phase 1, we will have hands-on experience with both framework-driven and script-based attack techniques.  
+
+## Setting Up the Victim Machine (Metasploitable3)
 
 We started by visiting the official Vagrant repository by Rapid7:  
 🔗 [https://app.vagrantup.com/rapid7](https://app.vagrantup.com/rapid7)
