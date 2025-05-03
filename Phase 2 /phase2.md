@@ -153,6 +153,8 @@ The script uses the `paramiko` library to try multiple username and password com
 Several connection attempts failed due to SSH protocol issues — specifically when the server didn’t respond properly to the connection, causing timeout or banner read errors.
 
 ![Brute Force Script](https://github.com/user-attachments/assets/abada982-d5d7-4be0-9901-ebe0f2656be6)
+![WhatsApp Image 1446-11-05 at 13 33 14](https://github.com/user-attachments/assets/c6678d92-dcdf-4ee3-9032-d7a80cdaccae)
+
 
 ---
 
