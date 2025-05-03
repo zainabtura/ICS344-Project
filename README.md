@@ -23,6 +23,6 @@ The project simulates a real-world security scenario by:
 
 | Name              | Student ID   |
 |-------------------|--------------|
-| Zainab Alturaiki  | 201960710    |
+| Zainab Alturaiki  | 202156350    |
 | Sara Alshayeb     | 202174910    |
-| Noor Alqatari     | 201961780    |
+| Noor Alqatari     | 202174930    |
