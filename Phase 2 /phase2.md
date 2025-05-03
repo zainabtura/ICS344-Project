@@ -48,7 +48,7 @@ We navigated to the Splunk binary directory and started the service using the fo
 cd /opt/splunk/bin
 sudo ./splunk start --accept-license
 ```
-
+![WhatsApp Image 1446-11-05 at 12 08 56](https://github.com/user-attachments/assets/8dd76f0b-0dfd-4e14-82f9-63879c8095a7)
 ![Step 1](https://github.com/user-attachments/assets/35471fbe-205b-49f5-b020-8a6eab2c1b53)
 
 The --accept-license flag was used to automatically approve the Splunk license agreement. During the first-time startup, Splunk prompted us to create an administrator account. We set a username and a secure password as part of the setup process.
