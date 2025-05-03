@@ -11,21 +11,30 @@ As required in the project, we used **Splunk** as our SIEM platform and configur
 
 ---
 
-###  Step 0: Downloading and Extracting Splunk
+###  Step 1: Downloading and Extracting Splunk
 
-We began by downloading the `.tgz` package and extracting it into `/opt/`.
+To begin the SIEM setup, we downloaded the official Splunk installer for Linux from Splunk’s website. We used the `.tgz` archive format suitable for manual extraction.
+
+The following actions were performed:
+
+1. **Downloaded the Splunk package** using `wget`, which fetched version `9.4.1` of the 64-bit Linux release.
+2. **Moved the downloaded archive** to the `/opt` directory, which is commonly used for installing optional or third-party software.
+3. **Extracted the archive** in `/opt` using the `tar` command, which created a directory containing all necessary Splunk files and folders.
+
+These steps ensured Splunk was properly unpacked and ready for configuration within the attacker machine (Kali Linux), as required for SIEM dashboard setup.
 
 ```bash
-sudo mv splunk-9.4.1-e3bdab203ac8-linux-amd64.tgz /opt/
-cd /opt
-sudo tar xvzf splunk-9.4.1-e3bdab203ac8-linux-amd64.tgz
+wget https://download.splunk.com/products/splunk/releases/9.4.1/linux/splunk-9.4.1-83dbab203ac8-linux-amd64.tgz
+sudo mv splunk-9.4.1-83dbab203ac8-linux-amd64.tgz /opt/
+cd /opt/
+sudo tar xvzf splunk-9.4.1-83dbab203ac8-linux-amd64.tgz
 ```
 
 ![Step 0](https://github.com/user-attachments/assets/ec06de2a-057f-429e-b6c8-7d7da21f0e10)
 
 ---
 
-###  Step 1: First Launch of Splunk
+###  Step 2: First Launch of Splunk
 
 We launched Splunk for the first time using:
 
@@ -40,7 +49,7 @@ It prompted for admin credentials, generated necessary keys, and verified port a
 
 ---
 
-### Step 2: Configuring Splunk to Receive Logs
+### Step 3: Configuring Splunk to Receive Logs
 
 After logging into Splunk at `http://kali:8000`, we navigated to:
 
@@ -65,7 +74,7 @@ This menu allows configuration of inputs and ensures logs can be ingested correc
 
 ---
 
-### Step 3: Installing Splunk Forwarder on the Victim Machine
+### Step 4: Installing Splunk Forwarder on the Victim Machine
 
 To forward logs from the victim environment (Metasploitable3), we installed the Splunk Universal Forwarder.  
 This lightweight version of Splunk is designed specifically for collecting and sending logs to a remote Splunk server.
@@ -86,7 +95,7 @@ Once the download completed successfully, the `.deb` package was saved and ready
 
 ---
 
-### Step 4: Connect Forwarder to Splunk Server
+### Step 5: Connect Forwarder to Splunk Server
 
 After installation, we configured the forwarder to send logs to our Splunk instance:
 
@@ -100,7 +109,7 @@ We were then prompted to enter the Splunk username and password.
 
 ---
 
-### Step 5: Configure Log Monitoring
+### Step 6: Configure Log Monitoring
 
 Next, we configured the forwarder to monitor the file `/var/log/auth.log`, which contains authentication and login attempts.
 
@@ -112,7 +121,7 @@ sudo /opt/splunkforwarder/bin/splunk add monitor /var/log/auth.log
 
 ---
 
-### Step 6: Executing Custom SSH Brute Force Script
+### Step 7: Executing Custom SSH Brute Force Script
 
 Before analyzing the logs in Splunk, we executed a custom Python script (`ssh_bruteforce.py`) on the attacker machine to simulate an SSH brute-force attack against the victim (Metasploitable3).
 
@@ -124,7 +133,7 @@ Several connection attempts failed due to SSH protocol issues — specifically w
 
 ---
 
-### 📊 Step 7: Visualizing the Attack Logs in Splunk
+### 📊 Step 8: Visualizing the Attack Logs in Splunk
 
 After setting up the forwarder and generating SSH brute-force activity, we used the Splunk Search interface to visualize the data.
 
