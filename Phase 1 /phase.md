@@ -113,7 +113,7 @@ We chose to focus on the **SSH service** as our target for exploitation because:
 
 ---
 
-## SSH Brute Force Attack (Metasploit)
+## Task 1.1: SSH Brute Force Attack (Metasploit)
 
 To initiate the attack on the SSH service, we followed a structured approach:
 
