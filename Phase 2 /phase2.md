@@ -168,9 +168,7 @@ This confirmed that the brute-force attempt worked and gave us remote access to 
 These log entries are not related to the brute-force attack directly, but rather to routine system tasks. Specifically:
 
 - The logs show pam_unix(cron:session) messages, which indicate that cron jobs (scheduled tasks) were opened and closed for the root user.
-- Each entry states either:
--   session opened for user root by (uid=0) or
--     session closed for user root
+- Each entry states either: session opened for user root by (uid=0) or  session closed for user root
 
 This is standard behavior in Unix-like systems, where background tasks (like system cleanups or automated scripts) run periodically as the root user through the cron daemon. These entries are timestamped and grouped closely by time, showing that the system is regularly running scheduled tasks.
 
