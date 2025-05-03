@@ -1,4 +1,4 @@
-# Phase 1
+# Phase 1: Setup and Compromise the SSH Service
 
 In this phase, we will deploy our victim and attacker environments. We’ll configure Metasploitable3 as the victim machine—complete with its built-in vulnerable services (IIS FTP/HTTP, SSH, WinRM, WebDAV, SNMP, SMB, RDP, etc.)—and spin up a Kali Linux attacker host on the same network. Once both VMs are running, we’ll verify connectivity by scanning and pinging the victim from Kali.
 
