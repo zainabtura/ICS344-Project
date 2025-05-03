@@ -176,16 +176,23 @@ index=* source="/var/log/auth.log" "sshd" | timechart count by user
 
 ![Log Visualization](https://github.com/user-attachments/assets/f4ed8d61-9d1c-461b-b774-f1ed27c0cfe4)
 
+---
 This generated both line chart and bar chart 
 <img width="942" alt="barchart" src="https://github.com/user-attachments/assets/2b8eb011-3097-403f-adbb-a8c683fecb18" />
 <img width="942" alt="linechart" src="https://github.com/user-attachments/assets/c01653ba-1d93-4030-8005-bfd61b6a3f1d" />
 
+---
 
-#### 📉 Line Chart Complete View:
+The raw logs captured from /var/log/auth.log in Splunk provide granular visibility into each authentication event. These logs clearly show multiple SSH authentication failures originating from the attacker's IP address (172.20.10.7) targeting user accounts like root and vagrant. The presence of numerous failure messages confirms the brute-force nature of the attack, where the system repeatedly attempted to guess login credentials. This raw log data not only validates the trends seen in the bar and line charts, but also provides the exact timestamps, usernames, and source IPs involved, making it a critical reference for forensic analysis and attack attribution. 
+**to see the entire logs capture, please see the PDFs attached below** 
+
+![WhatsApp Image 1446-11-05 at 15 01 52](https://github.com/user-attachments/assets/b5a3570a-60a4-4907-9e15-493a15d8c6fd)
+
+#### 📉 Line Chart Complete View (with logs): 
 [lineChart.pdf](https://github.com/user-attachments/files/20023136/lineChart.pdf)
 
 
-#### 📊 Bar Chart Complete View:
+#### 📊 Bar Chart Complete View (with logs):
 [barchart.pdf](https://github.com/user-attachments/files/20023137/barchart.pdf)
 
 The bar chart shows the number of SSH authentication events over time, categorized by user: root, vagrant, and NULL. The NULL category represents authentication attempts where the username could not be identified—commonly a result of malformed login attempts or failed brute-force attempts that didn’t provide valid usernames. These dominate the chart, indicating a high frequency of invalid or unauthenticated login attempts. The root and vagrant bars appear much smaller in comparison, showing a lower number of login attempts targeting valid usernames.
@@ -205,6 +212,27 @@ index=* source="/var/log/auth.log" ("Failed" OR "Accepted")
 
 This bar chart visualizes the authentication outcomes across time intervals—showing a clear dominance of failed attempts with only a few successful ones.
 
+Additionally, by querying the authentication logs from /var/log/auth.log for keywords like "Failed" and "Accepted", we were able to directly observe the underlying events that fueled the visualizations. The failed login logs show repeated SSH authentication failures for various usernames including root, vagrant, and several invalid or non-existent users such as msfadmin. These logs clearly indicate a brute-force pattern—many login attempts originating from the same source IP (172.20.10.7), each targeting different usernames in rapid succession. This aligns with the behavior of automated scripts attempting to guess credentials. On the other hand, the few "Accepted" entries confirm that the attacker eventually succeeded in authenticating using the vagrant account. The presence of both failure and success entries in the logs provides strong forensic evidence of a real brute-force attack, confirming the trends highlighted in both the bar and line charts.
+
+![WhatsApp Image 1446-11-05 at 15 02 29](https://github.com/user-attachments/assets/352242c4-4194-4c16-b31c-cada4a72bd29)
+![WhatsApp Image 1446-11-05 at 15 01 08](https://github.com/user-attachments/assets/1dd52857-b7f3-411b-b2f1-8ecdf842428b)
+
+
 These results validate the brute-force behavior: a large number of failed login attempts followed by rare successful logins, likely when the correct credentials were guessed. The spacing of bars also reveals how the attack was executed in timed waves, possibly with retry delays or rate-limiting from the target system.
 
 ---
+## Conclusion 
+In Phase 2, we successfully integrated logs from both the victim (Metasploitable3) and attacker (Kali) environments into Splunk, a SIEM platform, to observe and analyze the behavior of our brute-force attack.
+
+We began by configuring Splunk on Kali to receive logs over TCP port 9997, enabling the ingestion of system logs from the victim machine. Once the SSH brute-force attack was executed—targeting multiple usernames using an automated Python script—the forwarded logs captured authentication events in real time.
+
+Using Splunk’s Search & Reporting dashboard, we visualized these logs in various forms:
+
+- Bar Charts and Line Charts: These charts revealed a sharp increase in SSH activity during the attack window. Most events were tied to NULL usernames, highlighting the attacker’s attempt to authenticate with invalid or malformed usernames. Meanwhile, valid users like root and vagrant were targeted less frequently, with vagrant eventually showing successful login entries.
+- Raw Logs: By filtering for keywords such as "Failed" and "Accepted", we examined the underlying log messages, confirming our visual findings. The logs captured multiple repeated failures from the same IP address, consistent with brute-force tactics, followed by a few successful entries that validated a breach.
+Together, these visualizations and logs provided deep visibility into the pattern and outcome of the attack:
+
+It was automated, with regular time intervals between attempts.
+It primarily targeted invalid usernames, indicating a broad sweep approach.
+It eventually succeeded, which poses critical security implications.
+This phase demonstrated how SIEM tools like Splunk can effectively detect, visualize, and validate cyberattacks, transforming raw log data into actionable insights. It also highlights the importance of real-time monitoring and alerting mechanisms for mitigating such threats before successful compromise occurs.
