@@ -1,4 +1,4 @@
-
+# Phase 3: Defense Mechanism & Testing
 In this phase of the project, our goal was to harden the SSH service on Metasploitable3 against automated brute-force attacks. We began by establishing a baseline “before” scenario—live-tailing the SSH authentication log and launching a scripted password-guessing attack from Kali—so that we could clearly demonstrate the system’s vulnerability. We then installed and configured Fail2Ban, a lightweight intrusion-prevention daemon that scans /var/log/auth.log for repeated SSH failures and dynamically injects iptables rules to block offending IP addresses. Finally, we validated the defense by repeating the same brute-force test and showing, in real time, that Fail2Ban automatically detected three consecutive failed login attempts, applied a temporary ban, and dropped all further SSH connections from the attacker’s IP.
 
 Throughout this phase we used:
