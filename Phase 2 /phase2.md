@@ -1,13 +1,9 @@
 
 # 📊 ICS344 – Phase 2: Visual Analysis with a SIEM Dashboard
 
-This phase aims to integrate logs from the attacker and/or victim environments into a SIEM tool and visualize/analyze those logs to better understand the attack activity.
+In this phase, our goal was to build visibility into the attack by collecting and analyzing logs using a Security Information and Event Management (SIEM) system. By deploying **Splunk** on the attacker machine, we were able to collect logs from both attacker and victim environments, visualize authentication attempts, and correlate the data to understand when and how the attack succeeded.
 
----
-
-## SIEM Setup – Splunk
-
-As required in the project, we used **Splunk** as our SIEM platform and configured it on the attacker environment (Kali Linux).
+This phase lays the groundwork for monitoring, detection, and response by leveraging Splunk’s powerful log parsing and dashboard features.
 
 ---
 
