@@ -163,6 +163,20 @@ This confirmed that the brute-force attempt worked and gave us remote access to 
 
 
 ---
+### Background System Activity: Cron Sessions from the Victim Machine
+![image](https://github.com/user-attachments/assets/fd8bb2d1-b88a-43b2-8082-fd5b56e79002)
+These log entries are not related to the brute-force attack directly, but rather to routine system tasks. Specifically:
+
+- The logs show pam_unix(cron:session) messages, which indicate that cron jobs (scheduled tasks) were opened and closed for the root user.
+- Each entry states either:
+-   session opened for user root by (uid=0) or
+-     session closed for user root
+
+This is standard behavior in Unix-like systems, where background tasks (like system cleanups or automated scripts) run periodically as the root user through the cron daemon. These entries are timestamped and grouped closely by time, showing that the system is regularly running scheduled tasks.
+
+While these logs aren't directly tied to attack attempts, including them shows that the log forwarding setup is functioning correctly and capturing all types of authentication events—not just SSH logins. It helps validate the integrity and completeness of the log ingestion pipeline from the victim machine to Splunk.
+
+---
 
 ### Step 8: Visualizing the Attack Logs in Splunk
 
@@ -219,6 +233,7 @@ Additionally, by querying the authentication logs from /var/log/auth.log for key
 
 
 These results validate the brute-force behavior: a large number of failed login attempts followed by rare successful logins, likely when the correct credentials were guessed. The spacing of bars also reveals how the attack was executed in timed waves, possibly with retry delays or rate-limiting from the target system.
+
 
 ---
 ## Conclusion 
