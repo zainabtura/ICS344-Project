@@ -208,6 +208,8 @@ sudo iptables -L f2b-sshd -n --line-numbers
 
 Together, these steps conclusively demonstrate that after three failed login attempts, Fail2Ban intercepts further SSH connections and injects a firewall rule to refuse traffic from the attacker’s IP—successfully mitigating the brute-force threat.
 
+### before-and-after comparison 
+
 To demonstrate the effect of our SSH hardening, we first ran the exact same Python brute-force script from Kali before enabling Fail2Ban. Before enabling Fail2Ban, the script quickly discovered valid root credentials (vagrant:vagrant), as shown here.
 ![14](https://github.com/user-attachments/assets/93e56d10-da6f-46ee-85fc-690e186d389e)
 
