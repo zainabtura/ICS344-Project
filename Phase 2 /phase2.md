@@ -36,12 +36,9 @@ sudo tar xvzf splunk-9.4.1-83dbab203ac8-linux-amd64.tgz
 
 ###  Step 2: First Launch of Splunk
 
-We navigated to Splunk’s installation directory and ran the startup command, accepting the license agreement. Splunk then prompted us to:
+After extracting Splunk, we proceeded to start the service and complete the initial setup required for first-time use.
 
-- Create an administrator username and password.  
-- Generate RSA key pairs for secure communication.  
-- Verify that all required ports (HTTP 8000, management 8089, REST 8065, KVStore 8191) are open.  
-- Initialize internal directories under `/opt/splunk/var`.
+We navigated to the Splunk binary directory and started the service using the following command:
 
 ```bash
 cd /opt/splunk/bin
@@ -49,6 +46,27 @@ sudo ./splunk start --accept-license
 ```
 
 ![Step 1](https://github.com/user-attachments/assets/35471fbe-205b-49f5-b020-8a6eab2c1b53)
+
+The --accept-license flag was used to automatically approve the Splunk license agreement. During the first-time startup, Splunk prompted us to create an administrator account. We set a username and a secure password as part of the setup process.
+
+The initialization process included several checks and operations:
+
+Validation of installation files
+Setup of directories for logs, sessions, hash storage, and configurations
+Generation of RSA private keys for internal communication
+Configuration of certificate files (privKeySecure.pem)
+Startup of the Splunk server daemon (splunkd)
+After all checks passed, Splunk began listening on its default service ports:
+
+8000 → Web Interface
+8089 → Management Port
+8065 → App Server Port
+8191 → KV Store
+Once the setup completed, the web interface became available at:
+```bash
+http://kali:8000
+```
+This URL provides access to the Splunk dashboard, where we can begin configuring data inputs, monitoring logs, and building visualizations.
 
 ---
 
