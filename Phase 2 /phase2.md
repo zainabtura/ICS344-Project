@@ -1,5 +1,5 @@
 
-# 📊 ICS344 – Phase 2: Visual Analysis with a SIEM Dashboard
+# Phase 2: Visual Analysis with a SIEM Dashboard
 
 In this phase, we focused on leveraging a SIEM platform—**Splunk**—to collect, analyze, and visualize logs from both the attacker and victim environments. The goal was to monitor the attack activity from multiple perspectives and gain a deeper understanding of how the attack unfolded.
 
@@ -164,11 +164,11 @@ This confirmed that the brute-force attempt worked and gave us remote access to 
 
 ---
 
-### 📊 Step 8: Visualizing the Attack Logs in Splunk
+### Step 8: Visualizing the Attack Logs in Splunk
 
-After setting up the forwarder and generating SSH brute-force activity, we used the Splunk Search interface to visualize the data.
+After forwarding the logs and executing the brute-force attack, we used Splunk's **Search & Reporting** dashboard to visualize the captured authentication events from `/var/log/auth.log`.
 
-Query used:
+We ran the following query to generate a time-based chart showing SSH activity:
 
 ```spl
 index=* source="/var/log/auth.log" "sshd" | timechart count by user
@@ -176,13 +176,35 @@ index=* source="/var/log/auth.log" "sshd" | timechart count by user
 
 ![Log Visualization](https://github.com/user-attachments/assets/f4ed8d61-9d1c-461b-b774-f1ed27c0cfe4)
 
-#### 📉 Line Chart View:
-This view helped us track how login attempts changed over time for each user.
+This generated both line chart and bar chart 
+<img width="942" alt="barchart" src="https://github.com/user-attachments/assets/2b8eb011-3097-403f-adbb-a8c683fecb18" />
+<img width="942" alt="linechart" src="https://github.com/user-attachments/assets/c01653ba-1d93-4030-8005-bfd61b6a3f1d" />
 
-[lineChart.pdf](https://github.com/user-attachments/files/19983750/lineChart.pdf)
 
-#### 📊 Bar Chart View:
-The bar chart provided a clearer comparison between users during each time interval.
+#### 📉 Line Chart Complete View:
+[lineChart.pdf](https://github.com/user-attachments/files/20023136/lineChart.pdf)
 
-[lineChart.pdf](https://github.com/user-attachments/files/19983751/lineChart.pdf)
+
+#### 📊 Bar Chart Complete View:
+[barchart.pdf](https://github.com/user-attachments/files/20023137/barchart.pdf)
+
+The bar chart shows the number of SSH authentication events over time, categorized by user: root, vagrant, and NULL. The NULL category represents authentication attempts where the username could not be identified—commonly a result of malformed login attempts or failed brute-force attempts that didn’t provide valid usernames. These dominate the chart, indicating a high frequency of invalid or unauthenticated login attempts. The root and vagrant bars appear much smaller in comparison, showing a lower number of login attempts targeting valid usernames.
+
+The line chart further highlights the same trends but with clearer temporal patterns. Spikes in the NULL line indicate bursts of invalid SSH attempts during specific periods—aligning with our brute-force testing window. The vagrant and root lines show smaller, consistent peaks, suggesting that these accounts were also targeted but less aggressively. The presence of regular time gaps between spikes may correspond to automated retry intervals or cooling-off periods enforced by the attacker script or security mechanisms.
+
+Together, these visualizations confirm the occurrence of a brute-force attack focused on random or guessed usernames, with intermittent targeted attempts on specific user accounts. This supports our Phase 2 objective of detecting and analyzing attack behavior using SIEM dashboards.
+
+#### Authentication Result Breakdown (Accepted vs Failed)
+To gain deeper insight into whether those login attempts succeeded or failed, we ran the following query:
+```spl
+index=* source="/var/log/auth.log" ("Failed" OR "Accepted") 
+| eval status=if(searchmatch("Failed"), "Failed", "Accepted") 
+| timechart span=1h count by status
+```
+![WhatsApp Image 1446-11-05 at 12 18 11](https://github.com/user-attachments/assets/c49c1588-4229-4076-95a8-3a9f2a995e82)
+
+This bar chart visualizes the authentication outcomes across time intervals—showing a clear dominance of failed attempts with only a few successful ones.
+
+These results validate the brute-force behavior: a large number of failed login attempts followed by rare successful logins, likely when the correct credentials were guessed. The spacing of bars also reveals how the attack was executed in timed waves, possibly with retry delays or rate-limiting from the target system.
+
 ---
