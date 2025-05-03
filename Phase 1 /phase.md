@@ -110,12 +110,6 @@ We chose to focus on the **SSH service** as our target for exploitation because:
 - It was accessible via port 22 on IP `192.168.64.7`
 - The version in use (`OpenSSH 6.6.1`) is known to be outdated
 - SSH is a critical service that can provide full shell access if compromised
-  To identify a suitable exploit module, we searched inside Metasploit using:
-
-```bash
-search ssh
-```
-![WhatsApp Image 1446-10-24 at 09 53 38](https://github.com/user-attachments/assets/c2d9bedb-91cc-421a-8c81-e972a594930b)
 
 ---
 
@@ -138,6 +132,7 @@ We then started Metasploit by running the following command in the terminal:
 
 ```bash
 msfconsole
+```
 
 ![WhatsApp Image 1446-10-23 at 10 05 00](https://github.com/user-attachments/assets/1b8cfd11-e706-4602-b64c-6cdb9d894029)
 
@@ -151,6 +146,7 @@ We used the following command:
 
 ```bash
 search ssh
+```
 
 ![WhatsApp Image 1446-10-24 at 09 53 38](https://github.com/user-attachments/assets/c2d9bedb-91cc-421a-8c81-e972a594930b) 
 
