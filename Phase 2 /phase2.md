@@ -48,8 +48,6 @@ cd /opt/splunk/bin
 sudo ./splunk start --accept-license
 ```
 
-It prompted for admin credentials, generated necessary keys, and verified port availability for the web UI (`http://kali:8000`).
-
 ![Step 1](https://github.com/user-attachments/assets/35471fbe-205b-49f5-b020-8a6eab2c1b53)
 
 ---
